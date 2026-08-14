@@ -1,8 +1,8 @@
 from kivy.uix.screenmanager import Screen
-from kivy.uix.gridlayout import GridLayout
+from kivy.uix.floatlayout import FloatLayout
 
 class SurpriseScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        layout = GridLayout(cols=1, padding=10, spacing=10)
+        layout = FloatLayout()

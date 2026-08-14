@@ -1,6 +1,6 @@
 from kivy.app import App
 from kivy.uix.screenmanager import Screen, NoTransition
-from kivy.uix.gridlayout import GridLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.image import Image
@@ -10,7 +10,7 @@ class HomeScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        layout = GridLayout(cols=1, padding=10, spacing=10)
+        layout = FloatLayout()
         self.background_image = Image()
         layout.add_widget(self.background_image)
 
