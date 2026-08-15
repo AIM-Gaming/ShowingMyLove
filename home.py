@@ -11,8 +11,13 @@ class HomeScreen(Screen):
         super().__init__(**kwargs)
 
         layout = FloatLayout()
+
+        self.confetti_audio = None
+        self.confetti = None
+
         self.background_image = Image(source="background.png", allow_stretch=True, keep_ratio=False)
         layout.add_widget(self.background_image, index=1)
+
         self.autism_creature = Image(source="C:\\Users\\sonea\\Downloads\\autism_creature.png", size_hint=(None, None), size=(300, 300),
                                      pos_hint={'center_x': 0.5, 'center_y': 0.7})
         layout.add_widget(self.autism_creature, index=0)
