@@ -2,7 +2,6 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 
 from home import HomeScreen
-from surprise import SurpriseScreen
 
 class LoveApp(App):
     def __init__(self, **kwargs):
@@ -14,7 +13,6 @@ class LoveApp(App):
         self.manager = ScreenManager()
 
         self.manager.add_widget(HomeScreen(name="HomeScreen"))
-        self.manager.add_widget(SurpriseScreen(name="SurpriseScreen"))
 
         self.show_screen("HomeScreen")
         return self.manager
