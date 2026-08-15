@@ -1,10 +1,11 @@
+import os
 from kivy.app import App
 from kivy.uix.screenmanager import Screen
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.image import Image
-
+from kivy.core.audio import SoundLoader
 
 class HomeScreen(Screen):
     def __init__(self, **kwargs):
@@ -12,7 +13,9 @@ class HomeScreen(Screen):
 
         layout = FloatLayout()
 
-        self.confetti_audio = None
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        sound_path = os.path.join(base_dir, "yippee.mp3")
+        self.confetti_audio = SoundLoader.load(sound_path)
         self.confetti = None
 
         self.background_image = Image(source="background.png", allow_stretch=True, keep_ratio=False)
@@ -34,6 +37,9 @@ class HomeScreen(Screen):
 
     def shoot_confetti(self, instance):
         self.label.text = "HAPPY BIRTHDAY!!!"
-
+        if self.confetti_audio:
+            if self.confetti_audio.state == 'play':
+                self.confetti_audio.stop()
+            self.confetti_audio.play()
 
     
