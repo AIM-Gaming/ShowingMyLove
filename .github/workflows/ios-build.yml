@@ -25,7 +25,7 @@ jobs:
       - name: Install Kivy iOS Toolchain
         run: |
           pip install --upgrade pip setuptools
-          pip install kivy-ios
+          pip install cython==0.29.36 kivy-ios
 
       - name: Build Python and Kivy Recipes
         run: |
