@@ -15,7 +15,7 @@ class HomeScreen(Screen):
         layout = FloatLayout()
 
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        sound_path = os.path.join(base_dir, "yippee.mp3")
+        sound_path = os.path.join(base_dir, "yippee.m4a")
         self.confetti_audio = SoundLoader.load(sound_path)
 
         png_dir = os.path.dirname(os.path.abspath(__file__))
