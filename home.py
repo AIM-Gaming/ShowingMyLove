@@ -7,6 +7,8 @@ from kivy.uix.button import Button
 from kivy.uix.image import Image
 from kivy.core.audio import SoundLoader
 
+from confetti import GridSpriteConfetti
+
 class HomeScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -16,7 +18,16 @@ class HomeScreen(Screen):
         base_dir = os.path.dirname(os.path.abspath(__file__))
         sound_path = os.path.join(base_dir, "yippee.mp3")
         self.confetti_audio = SoundLoader.load(sound_path)
-        self.confetti = None
+
+        png_dir = os.path.dirname(os.path.abspath(__file__))
+        png_path = os.path.join(png_dir, "confetti.png")
+        self.confetti = GridSpriteConfetti(
+            source=png_path,
+            size_hint=(1, 1),
+            pos_hint={'center_x': 0.5, 'center_y': 0.5},
+            opacity=0
+        )
+        layout.add_widget(self.confetti, index=1)
 
         self.background_image = Image(source="background.png", allow_stretch=True, keep_ratio=False)
         layout.add_widget(self.background_image, index=1)
@@ -41,5 +52,5 @@ class HomeScreen(Screen):
             if self.confetti_audio.state == 'play':
                 self.confetti_audio.stop()
             self.confetti_audio.play()
-
+            self.confetti.play()
     
