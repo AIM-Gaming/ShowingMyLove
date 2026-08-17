@@ -1,0 +1,48 @@
+name: For My Love
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:  # Allows manual triggers from GitHub interface
+
+jobs:
+  build-ios:
+    runs-on: macos-14  # Apple Silicon Mac runner on GitHub
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install System Build Dependencies
+        run: |
+          brew install autoconf automake libtool pkg-config sqlite3
+
+      - name: Install Kivy iOS Toolchain
+        run: |
+          pip install --upgrade pip setuptools
+          pip install kivy-ios
+
+      - name: Build Python and Kivy Recipes
+        run: |
+          toolchain build python3 kivy
+
+      - name: Create Xcode Project
+        run: |
+          # Creates the Xcode project in the workspace
+          toolchain create "MyKivyApp" .
+
+      - name: Compress Xcode Project Artifact
+        run: |
+          zip -r MyKivyApp-iOS.zip mykivyapp-ios/
+
+      - name: Upload iOS Xcode Project Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyKivyApp-Xcode-Project
+          path: MyKivyApp-iOS.zip
+          retention-days: 7
